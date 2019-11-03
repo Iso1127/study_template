@@ -6,23 +6,11 @@
  */
 
 #include "TemplateImpl.h"
-
-TemplateImpl::ImpleSetting::ImpleSetting() :
-        is_valid(false), t1_(0), t2_(0) {
-}
-
-TemplateImpl::ImpleSetting::~ImpleSetting() {
-}
-
-void TemplateImpl::ImpleSetting::set(const Setting &setting) {
-//    ImpleSetting *p_setting = dynamic_cast<TemplateImpl*>(&setting);
-}
-
-void TemplateImpl::ImpleSetting::reset() {
-}
+#include <iostream>
 
 TemplateImpl::TemplateImpl() :
         setting_() {
+
 }
 
 TemplateImpl::~TemplateImpl() {
@@ -37,6 +25,10 @@ TemplateInterface::ErrorType TemplateImpl::fin() {
 }
 
 TemplateInterface::ErrorType TemplateImpl::setConfig(const Setting &setting) {
-//    setting_ = setting;
+    if (!setting.is_setting_a_valid_) {
+        return NG;
+    }
+    setting_ = setting.u.setting_a_;
+    std::cout << __PRETTY_FUNCTION__ << ":" << setting_.a << std::endl;
     return OK;
 }
